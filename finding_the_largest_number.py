@@ -28,15 +28,15 @@ class BackgroundFrame(tk.Frame):
             relheight=1
         )
 class CanvasAndButton (tk.Frame):
-    def __init__(self, parent,)
+    def __init__(self, parent,):
       tk.Frame.__init__(self, parent) 
 
       self.canvas = tk.Canvas(
           self,
           bg= "#FFFFFF",
           height=650,
-          width=400
-          bd=0
+          width=400,
+          bd=0,
           highlightthickness=0,
           relief="ridge"
         ) 
@@ -55,7 +55,7 @@ class CanvasAndButton (tk.Frame):
       self.button_2 = tk.Button (
           self.canvas,
           image=button_image,
-          borderwidth=0
+          borderwidth=0,
           highlightthickness=0,
           command=lambda: print("button_2 clicked"),
           relief="flat"
@@ -69,49 +69,45 @@ class CanvasAndButton (tk.Frame):
       
 class InputPage(tk.Frame):
     def __init__(self, parent, controller):
-        BackgroundFrame.__init__(self,parent, "Image_5.png")
-        self.controller=controller
+        BackgroundFrame.__init__(self, parent, "Image_5.png")
+        self.controller = controller
 
         entry_width = 20
         pady_value = 80
 
         y_position1 = 0.5 * self.winfo_reqheight() - 0.9 * pady_value
-        y_position1 = 0.5 * self.winfo_reqheight() + 0.23 * pady_value
-        y_position1 = 0.5 * self.winfo_reqheight() + 1.4 * pady_value
+        y_position2 = 0.5 * self.winfo_reqheight() + 0.23 * pady_value
+        y_position3 = 0.5 * self.winfo_reqheight() + 1.4 * pady_value
 
-        self.num_entry1 = tk.Entry(self, width = entry_width, justify = tk.CENTER)
-        self.num_entry2 = tk.Entry(self, width = entry_width, justify = tk.CENTER)
-        self.num_entry3 = tk.Entry(self, width = entry_width, justify = tk.CENTER)
+        self.num_entry1 = tk.Entry(self, width=entry_width, justify=tk.CENTER)
+        self.num_entry2 = tk.Entry(self, width=entry_width, justify=tk.CENTER)
+        self.num_entry3 = tk.Entry(self, width=entry_width, justify=tk.CENTER)
 
-        self.num_entry1.place (relx=0.5, rely = 0.5, anchor = tk.CENTER, y=y_position1)
-        self.num_entry2.place (relx=0.5, rely = 0.5, anchor = tk.CENTER, y=y_position2)
-        self.num_entry3.place (relx=0.5, rely = 0.5, anchor = tk.CENTER, y=y_position3)
-        
+        self.num_entry1.place(relx=0.5, rely=0.5, anchor=tk.CENTER, y=y_position1)
+        self.num_entry2.place(relx=0.5, rely=0.5, anchor=tk.CENTER, y=y_position2)
+        self.num_entry3.place(relx=0.5, rely=0.5, anchor=tk.CENTER, y=y_position3)
+
         tk.Button(
-            self, 
-            text= "Find", 
-            command= self.find_numbers).place(
-                relx=0.5, 
-                rely = 0.85, 
-                relheight = 0.05, 
-                relwidth = 0.2, 
-                anchor = "center"
-                )
-        self.canvas_and_button = CanvasAndButton (self)
+            self,
+            text="FIND",
+            command=self.find_numbers
+        ).place(relx=0.5, rely=0.85, relheight=0.05, relwidth=0.2, anchor="center")
+
+        self.canvas_and_button = CanvasAndButton(self)
 
     def find_numbers(self):
         try:
-            numbers = [float (entry.get()) for entry in (self.num_entry1, self.num_entry2, self.num_entry3)]
+            numbers = [float(entry.get()) for entry in (self.num_entry1, self.num_entry2, self.num_entry3)]
         except ValueError:
-            messagebox.showerror("Error","One or more inputs are not valid numbers.")
+            messagebox.showerror("Error", "Please enter valid numeric values.")
             return
-        
-        numbers.sort (reverse = True)
+
+        numbers.sort(reverse=True)
 
         result_str = f"{numbers[0]}, {numbers[1]}, {numbers[2]}"
-        
-        self.controller.frames["Result Page"].update_results(result_str)
-        self.controller.show_frame ("Result Page")
+
+        self.controller.frames["ResultPage"].update_results(result_str)
+        self.controller.show_frame("ResultPage")
 
         for entry in (self.num_entry1, self.num_entry2, self.num_entry3):
             entry.delete(0, tk.END)
@@ -125,8 +121,8 @@ class ResultPage(BackgroundFrame):
         pady_value = 80
 
         y_position1 = 0.5 * self.winfo_reqheight() - 0.2 * pady_value
-        y_position1 = 0.5 * self.winfo_reqheight() - 0.9 * pady_value
-        y_position1 = 0.5 * self.winfo_reqheight() - 1.98 * pady_value
+        y_position2 = 0.5 * self.winfo_reqheight() + 0.9 * pady_value
+        y_position3 = 0.5 * self.winfo_reqheight() + 1.98 * pady_value
 
         self.result_label1 = tk.Label(
             self,
@@ -135,8 +131,8 @@ class ResultPage(BackgroundFrame):
         )
         self.result_label1.place(
             relx=0.46, 
-            rely=0.5
-            anchor= "center",
+            rely=0.5,
+            anchor=tk.CENTER,
             y=y_position1
         )
 
@@ -147,9 +143,9 @@ class ResultPage(BackgroundFrame):
         )
         self.result_label2.place(
             relx=0.46, 
-            rely=0.5
-            anchor= "center",
-            y=y_position1
+            rely=0.5,
+            anchor=tk.CENTER,
+            y=y_position2
         )
 
         self.result_label3 = tk.Label(
@@ -159,9 +155,9 @@ class ResultPage(BackgroundFrame):
         )
         self.result_label3.place(
             relx=0.46, 
-            rely=0.5
-            anchor= "center",
-            y=y_position1
+            rely=0.5,
+            anchor=tk.CENTER,
+            y=y_position3
         )
 
         find_button = tk.Button (
@@ -171,23 +167,23 @@ class ResultPage(BackgroundFrame):
         )
         find_button.place(
             rely=0.915, 
-            relx=0.49
-            relheight=0.05
-            relwidth=0.23
+            relx=0.49,
+            relheight=0.05,
+            relwidth=0.23,
             anchor="center"
         )
-    def update_results(self,result_str):
+    def update_results(self, result_str):
         numbers = result_str.split(", ")
 
-        if len(numbers) >=1:
+        if len(numbers) >= 1:
             self.result_label1.config(text=numbers[0])
-        if len(numbers) >=2:
-            self.result_label1.config(text=numbers[1])
-        if len(numbers) >=3:
-            self.result_label1.config(text=numbers[2])
+        if len(numbers) >= 2:
+            self.result_label2.config(text=numbers[1])
+        if len(numbers) >= 3:
+            self.result_label3.config(text=numbers[2])
 
     def return_home(self):
-        self.controller.show_frame("User Window")
+        self.controller.show_frame("UserPage")
 
 class UserPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -207,7 +203,7 @@ class UserPage(tk.Frame):
         play_button = tk.Button(
             self,
             text="PLAY",
-            font= ("Arial", 20)
+            font= ("Arial", 20),
             command=self.play_game)
         play_button.place(
             relx=0.48,
@@ -218,21 +214,17 @@ class UserPage(tk.Frame):
         )
 
     def play_game(self):
-        self.controller.show_frame ("Input Page")
+        self.controller.show_frame ("InputPage")
         
 class NumericalClash(tk.Tk):
     def __init__(self):
-        tk.Tk__init__(self)
+        tk.Tk.__init__(self)
         self.title ("Numerical Clash")
         self.geometry ("400x600")
         self.resizable (False, False)
 
         container = tk.Frame (self)
-        container.pack (
-            side = "top",
-            fill = "both",
-            expand= True,
-            )
+        container.pack (side = "top", fill = "both", expand= True,)
         container.grid_rowconfigure (0, weight = 1)
         container.grid_columnconfigure (0, weight = 1)
 
