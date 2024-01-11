@@ -33,7 +33,7 @@ class CanvasAndButton (tk.Frame):
 
       self.canvas = tk.Canvas(
           self,
-          bg= "#FFFFFF"
+          bg= "#FFFFFF",
           height=650,
           width=400
           bd=0
@@ -52,7 +52,7 @@ class CanvasAndButton (tk.Frame):
       
       button_image_path = "button_2.png"
       button_image = tk.PhotoImage (file=relative_to_assets(image_path))
-      self.button = tk.Button (
+      self.button_2 = tk.Button (
           self.canvas,
           image=button_image,
           borderwidth=0
@@ -61,11 +61,11 @@ class CanvasAndButton (tk.Frame):
           relief="flat"
       )
       self.button_2.place(
-        x=68,
-        y=515,
-        width=279,
-        height= 128
-    )
+            x=68,
+            y=515,
+            width=279,
+            height=128
+        )
       
 class InputPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -221,6 +221,39 @@ class UserPage(tk.Frame):
         self.controller.show_frame ("Input Page")
         
 class NumericalClash(tk.Tk):
+    def __init__(self):
+        tk.Tk__init__(self)
+        self.title ("Numerical Clash")
+        self.geometry ("400x600")
+        self.resizable (False, False)
 
-app = NumericalClash()
+        container = tk.Frame (self)
+        container.pack (
+            side = "top",
+            fill = "both",
+            expand= True,
+            )
+        container.grid_rowconfigure (0, weight = 1)
+        container.grid_columnconfigure (0, weight = 1)
+
+        self.frames = {}
+
+        for F in (UserPage, InputPage, ResultPage):
+            page_name = F.__name__
+            frame =  F (parent=container, controller=self)
+            self.frames [page_name] = frame
+
+            frame.grid(
+                row=0,
+                column=0,
+                sticky="nsew"
+            )
+        self.show_frame("UserPage")
+
+    def show_frame(self, page_name):
+        frame = self.frames[page_name]
+        frame.tkraise()
+
+if __name__ == "__main__":
+    app = NumericalClash()
     app.mainloop()
