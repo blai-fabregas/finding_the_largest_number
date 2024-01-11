@@ -29,7 +29,26 @@ class BackgroundFrame(tk.Frame):
         )
 class CanvasAndButton (tk.Frame):
     def __init__(self, parent,)
-        
+      tk.Frame.__init__(self, parent) 
+
+      self.canvas = tk.Canvas(
+          self,
+          bg= "#FFFFFF"
+          height=650,
+          width=400
+          bd=0
+          highlightthickness=0,
+          relief="ridge"
+        ) 
+      self.canvas.place (
+          x=0,
+          y=0
+      )
+
+      images = ["image_4.png", "image_5.png", "image_6.png"]
+      for i, image_path in enumerate (images, start=1):
+          image =  tk.PhotoImage (file = relative_to_assets (image_path))
+
 # Making the Main Window
 window = Tk()
 window.title("Largest Number")
@@ -41,7 +60,8 @@ canvas = Canvas(
     bg = "#FFFFFF",
     height = 650,
     width = 400,
-    relief = "ridge")
+    relief = "ridge"
+)
 
 canvas.place (
     x = 0,
