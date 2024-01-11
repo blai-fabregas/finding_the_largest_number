@@ -48,6 +48,25 @@ class CanvasAndButton (tk.Frame):
       images = ["image_4.png", "image_5.png", "image_6.png"]
       for i, image_path in enumerate (images, start=1):
           image =  tk.PhotoImage (file = relative_to_assets (image_path))
+          self.canvas.create_image(201.0,325.0 if i != 2 else 300.0, image=image)
+      
+      button_image_path = "button_2.png"
+      button_image = tk.PhotoImage (file=relative_to_assets(image_path))
+      self.button = tk.Button (
+          self.canvas,
+          image=button_image,
+          borderwidth=0
+          highlightthickness=0,
+          command=lambda: print("button_2 clicked"),
+          relief="flat"
+      )
+    self.button_2.place(
+        x=68,
+        y=515,
+        width=279,
+        height= 128
+    )
+
 
 # Making the Main Window
 window = Tk()
