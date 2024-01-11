@@ -186,7 +186,41 @@ class ResultPage(BackgroundFrame):
         if len(numbers) >=3:
             self.result_label1.config(text=numbers[2])
 
-    def
+    def return_home(self):
+        self.controller.show_frame("User Window")
 
-app = SampleApp()
+class UserPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+
+        background_image = tk.PhotoImage(file=r"C:\\Users\\uella blainne\\Documents\\First Year\\Acads\\Programming Logics and Designs\\Assignment 4\\Images\\Image_1.png")
+        background_label = tk.Label(self, image=background_image)
+        background_label.image = background_image
+        background_label.place(
+            x=0,
+            y=0,
+            relwidth=1,
+            relheight=1
+        )
+
+        play_button = tk.Button(
+            self,
+            text="PLAY",
+            font= ("Arial", 20)
+            command=self.play_game)
+        play_button.place(
+            relx=0.48,
+            rely= 0.88,
+            relheight= 0.05,
+            relwidth= 0.2,
+            anchor= "center"
+        )
+
+    def play_game(self):
+        self.controller.show_frame ("Input Page")
+        
+class NumericalClash(tk.Tk):
+
+app = NumericalClash()
     app.mainloop()
