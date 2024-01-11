@@ -1,7 +1,7 @@
 #Assignment #4 - Finding the Largest Number Among 3 Inputs
 # Ask user to input 3 numbers
 # Print and determine the largest among the 3 numbers
-
+# Sort out the result from largest to lowest
 
 import tkinter as tk
 from pathlib import Path
@@ -176,28 +176,17 @@ class ResultPage(BackgroundFrame):
             relwidth=0.23
             anchor="center"
         )
-    
+    def update_results(self,result_str):
+        numbers = result_str.split(", ")
 
-        
+        if len(numbers) >=1:
+            self.result_label1.config(text=numbers[0])
+        if len(numbers) >=2:
+            self.result_label1.config(text=numbers[1])
+        if len(numbers) >=3:
+            self.result_label1.config(text=numbers[2])
 
-
-# Making the Main Window
-window = Tk()
-window.title("Largest Number")
-window.geometry ("400x620")
-window.configure (bg = "#FFFFFF")
-
-canvas = Canvas(
-    window,
-    bg = "#FFFFFF",
-    height = 650,
-    width = 400,
-    relief = "ridge"
-)
-
-canvas.place (
-    x = 0,
-    y = 0)
+    def
 
 app = SampleApp()
     app.mainloop()
