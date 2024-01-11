@@ -106,8 +106,81 @@ class InputPage(tk.Frame):
             messagebox.showerror("Error","One or more inputs are not valid numbers.")
             return
         
+        numbers.sort (reverse = True)
+
+        result_str = f"{numbers[0]}, {numbers[1]}, {numbers[2]}"
         
+        self.controller.frames["Result Page"].update_results(result_str)
+        self.controller.show_frame ("Result Page")
+
+        for entry in (self.num_entry1, self.num_entry2, self.num_entry3):
+            entry.delete(0, tk.END)
+
+class ResultPage(BackgroundFrame):
+    def __init__(self, parent, controller):
+        BackgroundFrame.__init__(self,parent, "Image_6.png")
+        self.controller = controller
+
+        entry_width = 20
+        pady_value = 80
+
+        y_position1 = 0.5 * self.winfo_reqheight() - 0.2 * pady_value
+        y_position1 = 0.5 * self.winfo_reqheight() - 0.9 * pady_value
+        y_position1 = 0.5 * self.winfo_reqheight() - 1.98 * pady_value
+
+        self.result_label1 = tk.Label(
+            self,
+            text = "",
+            font = ('Helvetica', 18),
+        )
+        self.result_label1.place(
+            relx=0.46, 
+            rely=0.5
+            anchor= "center",
+            y=y_position1
+        )
+
+        self.result_label2 = tk.Label(
+            self,
+            text = "",
+            font = ('Helvetica', 18),
+        )
+        self.result_label2.place(
+            relx=0.46, 
+            rely=0.5
+            anchor= "center",
+            y=y_position1
+        )
+
+        self.result_label3 = tk.Label(
+            self,
+            text = "",
+            font = ('Helvetica', 18),
+        )
+        self.result_label3.place(
+            relx=0.46, 
+            rely=0.5
+            anchor= "center",
+            y=y_position1
+        )
+
+        find_button = tk.Button (
+            self,
+            text = "Return to Home",
+            command = self.return_home
+        )
+        find_button.place(
+            rely=0.915, 
+            relx=0.49
+            relheight=0.05
+            relwidth=0.23
+            anchor="center"
+        )
+    
+
         
+
+
 # Making the Main Window
 window = Tk()
 window.title("Largest Number")
@@ -126,3 +199,5 @@ canvas.place (
     x = 0,
     y = 0)
 
+app = SampleApp()
+    app.mainloop()
